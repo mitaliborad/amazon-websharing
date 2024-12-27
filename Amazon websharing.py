@@ -9,7 +9,7 @@ import os # import os module in python
 
 data = [] # data for dictioonary
 
-
+"""
 #  1. drive a amazon  and show 1 to 10 pages laptop data on amazon and show information of all laptop.
 #Opens amazon's search results for the query "laptop."
 driver = webdriver.Chrome()
@@ -34,6 +34,7 @@ for i in range(1,10):
         print(elem.text)
 time.sleep(1)
 driver.close()
+"""
 
 #2. collect data from data folder and store title link and price in csv
 
@@ -54,9 +55,9 @@ for file in os.listdir("data") : # file in data folder
         
         
         # find link 
-        for link in l:
-            link = "https://amazon.in/" + l['href']
-            print("Link:", link)
+        #for link in l:
+        link = "https://amazon.in/" + l['href']
+        print("Link:", link)
             
         
         # find price in a-price-whole class in new attribute
