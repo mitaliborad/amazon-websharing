@@ -2,17 +2,24 @@
 from selenium import webdriver # open and controls web browser
 from selenium.webdriver.common.keys import Keys # in output press enter , tab, backspace
 from selenium.webdriver.common.by import By # for how to find element (by id, class, name)
+from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup #use for parsing HTML & XML
 import time # for pause time
 import pandas as pd #for data collect in csv
 import os # import os module in python
+
+# Configure Chrome options to reduce detection
+options = Options()
+options.add_argument('disable-infobars')
+options.add_experimental_option("excludeSwitches", ["enable-automation"])
+options.add_experimental_option('useAutomationExtension', False)
 
 data = [] # data for dictioonary
 
 
 #  1. drive a amazon  and show 1 to 10 pages laptop data on amazon and show information of all laptop.
 #Opens amazon's search results for the query "laptop."
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(options=options)
 query = "laptop"
 file = 0
 
@@ -74,5 +81,3 @@ for file in os.listdir("data") : # file in data folder
 
 df = pd.DataFrame(data) # with the help of pandas create dataframe of  data 
 df.to_csv("data.csv")  # convert df into csv file 
-
-
