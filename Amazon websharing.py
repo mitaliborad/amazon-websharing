@@ -2,7 +2,7 @@
 from selenium import webdriver # open and controls web browser
 from selenium.webdriver.common.keys import Keys # in output press enter , tab, backspace
 from selenium.webdriver.common.by import By # for how to find element (by id, class, name)
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.options import Options #for reduce detection
 from bs4 import BeautifulSoup #use for parsing HTML & XML
 import time # for pause time
 import pandas as pd #for data collect in csv
@@ -10,9 +10,9 @@ import os # import os module in python
 
 # Configure Chrome options to reduce detection
 options = Options()
-options.add_argument('disable-infobars')
-options.add_experimental_option("excludeSwitches", ["enable-automation"])
-options.add_experimental_option('useAutomationExtension', False)
+options.add_argument('disable-infobars') #removes the infobar at the top of the browser
+options.add_experimental_option("excludeSwitches", ["enable-automation"]) # for reduce detection , enable automation
+options.add_experimental_option('useAutomationExtension', False)#to turn off the Chrome automation extension
 
 data = [] # data for dictioonary
 
@@ -39,7 +39,7 @@ for i in range(1,10):
             f.write(d)
             file +=1
         print(elem.text)
-time.sleep(1)
+time.sleep(2)
 driver.close()
 
 
@@ -62,7 +62,6 @@ for file in os.listdir("data") : # file in data folder
         
         
         # find link 
-        #for link in l:
         link = "https://amazon.in/" + l['href']
         print("Link:", link)
             
@@ -73,7 +72,7 @@ for file in os.listdir("data") : # file in data folder
         print("Price:", price)
         
         
-        data.append({"Title": title, "Price": price, "Link": link})
+        data.append({"Title": title, "Price": price, "Link": link})#data collection
 
     except Exception as e:
         print(e)
